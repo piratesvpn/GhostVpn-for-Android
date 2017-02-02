@@ -264,7 +264,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
         return new ShortcutInfo.Builder(getContext(), profile.getUUIDString())
                 .setShortLabel(profile.getName())
                 .setLongLabel(getString(R.string.qs_connect, profile.getName()))
-                .setIcon(Icon.createWithResource(getContext(), R.drawable.ic_shortcut_vpn_key))
+                .setIcon(Icon.createWithResource(getContext(), R.drawable.ic_close_white_24dp))
                 .setIntent(shortcutIntent)
                 .setExtras(versionExtras)
                 .build();
@@ -478,7 +478,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
         }
     }
 
-    private boolean startImportConfigFilePicker() {
+    private boolean startImportConfigFilePicker() {//Metodo para llamar el ovpn desde un archivo
         boolean startOldFileDialog = true;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             startOldFileDialog = !startFilePicker();

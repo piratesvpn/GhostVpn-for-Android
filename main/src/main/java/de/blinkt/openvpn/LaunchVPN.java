@@ -33,6 +33,7 @@ import android.widget.EditText;
 import java.io.IOException;
 
 import de.blinkt.openvpn.activities.LogWindow;
+import de.blinkt.openvpn.activities.ReMainActivity;
 import de.blinkt.openvpn.core.ConnectionStatus;
 import de.blinkt.openvpn.core.IServiceStatus;
 import de.blinkt.openvpn.core.OpenVPNStatusService;
@@ -257,8 +258,8 @@ public class LaunchVPN extends Activity {
     }
 
     void showLogWindow() {
-
-        Intent startLW = new Intent(getBaseContext(), LogWindow.class);
+        //Metodo modificado para q muestre la actividad del boton de nuevo
+        Intent startLW = new Intent(getBaseContext(), ReMainActivity.class);
         startLW.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(startLW);
 

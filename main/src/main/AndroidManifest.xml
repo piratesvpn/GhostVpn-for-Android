@@ -55,7 +55,21 @@
         <activity android:name=".activities.FileSelect" />
         <activity
             android:name=".activities.MainActivity"
+            android:label="Ghost VPN"
             tools:ignore="ExportedActivity">
+
+            <intent-filter>
+
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                      </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.ReMainActivity"
+            android:label="Ghost VPN"
+            tools:ignore="ExportedActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

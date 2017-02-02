@@ -42,7 +42,6 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.main_activity);
 
-
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), this);
@@ -53,24 +52,24 @@ public class MainActivity extends BaseActivity {
         }
 
 
-
         mPagerAdapter.addTab(R.string.vpn_list_title, VPNProfileList.class);
 
         mPagerAdapter.addTab(R.string.generalsettings, GeneralSettings.class);
-        mPagerAdapter.addTab(R.string.faq, FaqFragment.class);
+        //mPagerAdapter.addTab(R.string.faq, FaqFragment.class);
 
         if(SendDumpFragment.getLastestDump(this)!=null) {
-            mPagerAdapter.addTab(R.string.crashdump, SendDumpFragment.class);
+          //  mPagerAdapter.addTab(R.string.crashdump, SendDumpFragment.class);
         }
 
-        if (isDirectToTV())
-            mPagerAdapter.addTab(R.string.openvpn_log, LogFragment.class);
+        //if (isDirectToTV())
+        //mPagerAdapter.addTab(R.string.openvpn_log, LogFragment.class);
+        //mPagerAdapter.addTab(R.string.about, AboutFragment.class);
 
-        mPagerAdapter.addTab(R.string.about, AboutFragment.class);
         mPager.setAdapter(mPagerAdapter);
 
         TabBarView tabs = (TabBarView) findViewById(R.id.sliding_tabs);
         tabs.setViewPager(mPager);
+
 
        // requestDozeDisable();
 	}
