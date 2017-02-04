@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_add_circle_outline_white_24dp"
+        android:title="mi ITem agregar"
+        android:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/show_vpn"
+        android:icon="@drawable/ic_content_copy_white_24dp"
+        android:title="mi otro item"
+
+        android:showAsAction="ifRoom">
+
+
+    <menu>
+        <item android:id="@+id/top"
+            android:title="s1"/>
+        <item android:id="@+id/bottom"
+            android:title="s2" />
+    </menu>
+
+    </item>
+
+
+
+</menu>

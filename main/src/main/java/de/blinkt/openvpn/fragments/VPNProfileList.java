@@ -64,7 +64,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
     public final static int RESULT_VPN_DUPLICATE = Activity.RESULT_FIRST_USER + 1;
 
     private static final int MENU_ADD_PROFILE = Menu.FIRST;
-
+    public static String vpnON;
     private static final int START_VPN_CONFIG = 92;
     private static final int SELECT_PROFILE = 43;
     private static final int IMPORT_PROFILE = 231;
@@ -137,7 +137,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
 
     private void startOrStopVPN(VpnProfile profile) {
         if (VpnStatus.isVPNActive() && profile.getUUIDString().equals(VpnStatus.getLastConnectedVPNProfile())) {
-            Intent disconnectVPN = new Intent(getActivity(), DisconnectVPN.class);
+            Intent disconnectVPN = new Intent(getActivity(), DisconnectVPN.class);//desconectar vpn
             startActivity(disconnectVPN);
         } else {
             startVPN(profile);
@@ -192,6 +192,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
 
         TreeSet<VpnProfile> sortedProfilesLRU = new TreeSet<VpnProfile>(new VpnProfileLRUComparator());
         ProfileManager profileManager = ProfileManager.getInstance(getContext());
+
         sortedProfilesLRU.addAll(profileManager.getProfiles());
 
         LinkedList<VpnProfile> LRUProfiles = new LinkedList<>();
@@ -478,7 +479,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
         }
     }
 
-    private boolean startImportConfigFilePicker() {//Metodo para llamar el ovpn desde un archivo
+    public boolean startImportConfigFilePicker() {//Metodo para llamar el ovpn desde un archivo
         boolean startOldFileDialog = true;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
             startOldFileDialog = !startFilePicker();
@@ -565,6 +566,8 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
         getPM().saveProfile(getActivity(), profile);
         mArrayadapter.add(profile);
     }
+
+
 
     private ProfileManager getPM() {
         return ProfileManager.getInstance(getActivity());

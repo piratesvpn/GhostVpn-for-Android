@@ -71,7 +71,10 @@ public class MainActivity extends BaseActivity {
         tabs.setViewPager(mPager);
 
 
-       // requestDozeDisable();
+        Intent returnIntent2 = new Intent(getApplicationContext(),ReMainActivity.class);
+        startActivity(returnIntent2);
+
+        // requestDozeDisable();
 	}
 
     @TargetApi(Build.VERSION_CODES.M)

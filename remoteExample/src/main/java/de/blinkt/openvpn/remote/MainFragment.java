@@ -85,6 +85,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Hand
             }
             br.readLine();
 
+
             if (addNew)
                 mService.addNewVPNProfile("nonEditable", false, config);
             else

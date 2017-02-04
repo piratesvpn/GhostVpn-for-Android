@@ -260,6 +260,7 @@ public class LaunchVPN extends Activity {
     void showLogWindow() {
         //Metodo modificado para q muestre la actividad del boton de nuevo
         Intent startLW = new Intent(getBaseContext(), ReMainActivity.class);
+        startLW.putExtra("on" , "true");
         startLW.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(startLW);
 

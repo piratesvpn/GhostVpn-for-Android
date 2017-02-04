@@ -34,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/blinkt"
         tools:ignore="UnusedAttribute">
+
+
+
         <activity
             android:name=".activities.VPNPreferences"
             android:exported="false"
@@ -53,10 +56,16 @@
             android:label="@string/openvpn_log"
             android:launchMode="singleTask" />
         <activity android:name=".activities.FileSelect" />
+
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.ReMainActivity"
             android:label="Ghost VPN"
-            tools:ignore="ExportedActivity">
+            tools:ignore="ExportedActivity"
+
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+            android:screenOrientation="portrait"
+            >
+
 
             <intent-filter>
 
@@ -66,7 +75,7 @@
         </activity>
 
         <activity
-            android:name=".activities.ReMainActivity"
+            android:name=".activities.MainActivity"
             android:label="Ghost VPN"
             tools:ignore="ExportedActivity">
 

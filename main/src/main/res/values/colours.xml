@@ -13,6 +13,12 @@
     <color name="gelb">#ffff00</color>
     <color name="rot">#ff0000</color>
 
+    <color name="bar_complete">#d477ff34</color>
+    <color name="bar">#f8246c00</color>
+    <color name="loaded_bar">#d6cfcfcf</color>
+
+
+
     <color name="switchbar">@android:color/darker_gray</color>
 
 
