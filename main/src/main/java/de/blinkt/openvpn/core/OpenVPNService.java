@@ -180,15 +180,15 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         android.app.Notification.Builder nbuilder = new Notification.Builder(this);
 
         if (mProfile != null)
-            nbuilder.setContentTitle(getString(R.string.notifcation_title, mProfile.mName));
+            nbuilder.setContentTitle("Conectado a: "+mProfile.mName);
         else
-            nbuilder.setContentTitle(getString(R.string.notifcation_title_notconnect));
+            nbuilder.setContentTitle("No conectado");
 
         nbuilder.setContentText(msg);
         nbuilder.setOnlyAlertOnce(true);
         nbuilder.setOngoing(true);
 
-        nbuilder.setSmallIcon(icon);
+        nbuilder.setSmallIcon(R.drawable.ic_menu_import);
         if (status == LEVEL_WAITING_FOR_USER_INPUT)
             nbuilder.setContentIntent(getUserInputIntent(msg));
         else

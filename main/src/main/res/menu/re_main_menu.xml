@@ -2,11 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- "Mark Favorite", should appear as action button if possible -->
+
+    <!--  <item
+        android:id="@+id/to_main"
+        android:icon="@drawable/ic_menu_import"
+        android:title="mi ITem agregar"
+        android:showAsAction="ifRoom"/>
+
+
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_add_circle_outline_white_24dp"
         android:title="mi ITem agregar"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"/>-->
 
     <item
         android:id="@+id/show_vpn"
@@ -17,10 +25,6 @@
 
 
     <menu>
-        <item android:id="@+id/top"
-            android:title="s1"/>
-        <item android:id="@+id/bottom"
-            android:title="s2" />
     </menu>
 
     </item>

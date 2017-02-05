@@ -8,11 +8,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.VpnService;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.support.annotation.RequiresApi;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +29,8 @@ import android.widget.Toast;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import java.util.Collection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.blinkt.openvpn.LaunchVPN;
 import de.blinkt.openvpn.R;
@@ -48,14 +54,14 @@ public class ReMainActivity extends Activity  {
 
     boolean vpnPower = false;
 
-    String on;
+
     CircularProgressView progressView;
     TextView txt;
     ProfileManager pM;
     VPNProfileList vpnList;
     Collection<VpnProfile> col;
     VpnProfile[] p ;
-    Context vpnListContext;
+    SubMenu sM;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -69,13 +75,8 @@ public class ReMainActivity extends Activity  {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         actionBar.setIcon(android.R.color.transparent);
 
-        Menu m = (Menu)findViewById(R.menu.re_main_menu);
-
         vpnList = new VPNProfileList();
 
-
-
-       System.out.println(m.getItem());
         //Profiles VPN manager
         pM = ProfileManager.getInstance(vpnList.getContext());
         col = pM.getProfiles();
@@ -85,18 +86,20 @@ public class ReMainActivity extends Activity  {
         //Getting profiles !! TNKS GOSHH
         for(VpnProfile vp : col) {
             p[i] = vp;
-            //System.out.println("perfil = " + vp);
             System.out.println("perfil" + i + " = "+ p[i]);
             i+=1;
         }
 
-
         txt = (TextView) findViewById(R.id.textView2);//texto central
-
 
         //associate pb
         progressView = (CircularProgressView) findViewById(R.id.progress_view);
-        vpnOff();//Initial pogress bar setting
+
+        //Validating Initial state
+        if (VpnStatus.isVPNActive()) {
+            vpnConnected();//Initial pogress bar setting
+        }else vpnOff();
+
         //Progress bar click listener
         progressView.setOnClickListener(new View.OnClickListener() {//CLick Listener para el circular progrss bar
             @Override
@@ -105,8 +108,10 @@ public class ReMainActivity extends Activity  {
                 vpnPower = !vpnPower;//switch vpn
 
                 if (vpnPower) {//prendieron el vpn
-                    vpnOn();
-                    startVPN(p[2]);//Star first VPN
+                     if (VpnStatus.isVPNActive()==false) {
+                         startVPN(p[0]);//Star first VPN
+                         vpnOn();
+                    }
                 } else if (vpnPower == false) { // vpn is power off
                     vpnOff();
                     Intent disconnectVPN = new Intent(getApplicationContext(), DisconnectVPN.class);//desconectar vpn
@@ -119,29 +124,50 @@ public class ReMainActivity extends Activity  {
 
     }
 
-
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
         super.onResume();
 
-        System.out.println("ESTADO DE VPN: "+ VpnStatus.isVPNActive());
+        //Validating cameback state
+        if (VpnStatus.isVPNActive()) {
+            vpnOn();//Initial pogress bar setting
+        }
+
+        if (VpnStatus.isVPNActive() == false) {
+            //vpnOff();//Initial pogress bar setting
+        }
+
+       // System.out.println(VpnStatus.getLastCleanLogMessage(this));
 
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Do the enable/disable/modification here
 
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                String result=data.getStringExtra("result");
+                for(int i = 0;i<p.length;i++){
+                    sM.add(0,i,i,p[i].getName());
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }//onActivityResult
+
+        return super.onPrepareOptionsMenu(menu);
+
+    }
+
+    public void  vpnConnected(){
+
+        progressView.setIndeterminate(false);
+        progressView.setMaxProgress(100f);
+        progressView.setProgress(100f);
+        progressView.setColor(getResources().getColor(R.color.bar_complete));
+        //startActivity(new Intent(getApplicationContext(),MainActivity.class));//Arrancando actividad de OpenVPN
+
+        txt.setTextColor(getResources().getColor(R.color.bar_complete));
+        txt.setText("VPN activo");
+
+
+    }
 
     //FUNCOONES
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -151,9 +177,6 @@ public class ReMainActivity extends Activity  {
         progressView.startAnimation();
         txt.setText("Encendiendo VPN");
         txt.setTextColor(getResources().getColor(R.color.bar));
-
-
-
 
         //Hilo
         Handler handler = new Handler();
@@ -167,10 +190,10 @@ public class ReMainActivity extends Activity  {
                 //startActivity(new Intent(getApplicationContext(),MainActivity.class));//Arrancando actividad de OpenVPN
 
                 txt.setTextColor(getResources().getColor(R.color.bar_complete));
-                txt.setText("VPN conectado");
+                txt.setText("VPN activo");
 
             }
-        }, 3000);
+        }, 5000);
 
     }
 
@@ -189,7 +212,6 @@ public class ReMainActivity extends Activity  {
 
     private void startVPN(VpnProfile profile) {
 
-
         Intent intent = new Intent(getApplicationContext(), LaunchVPN.class);
         intent.putExtra(LaunchVPN.EXTRA_KEY, profile.getUUID().toString());
         intent.setAction(Intent.ACTION_MAIN);
@@ -197,33 +219,41 @@ public class ReMainActivity extends Activity  {
     }
 
 
+
     // create an action bar button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.re_main_menu, menu);
+
+        sM = (menu.findItem(R.id.show_vpn)).getSubMenu();
+
+
         return true;
     }
 
+    int c = 0;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_favorite:
-               System.out.println("Undido boton del menu action bar");
-                startImportConfigFilePicker();
-                //vpnList.startImportConfigFilePicker();
-                return true;
 
-            case R.id.show_vpn:
-                //showPopup();
-                return true;
+        if (item.getItemId() < 20) {
+            startVPN(p[item.getItemId()]);
+            vpnOn();
+        }
 
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
+        c+=1;
+        //Boton oculto
+        if(c>5){
+
+            super.onBackPressed();
+            //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            c = 0;
 
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -257,3 +287,4 @@ public class ReMainActivity extends Activity  {
     }
 
 }
+

@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
@@ -42,6 +44,9 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.main_activity);
 
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), this);
@@ -52,10 +57,13 @@ public class MainActivity extends BaseActivity {
         }
 
 
+
         mPagerAdapter.addTab(R.string.vpn_list_title, VPNProfileList.class);
 
         mPagerAdapter.addTab(R.string.generalsettings, GeneralSettings.class);
         //mPagerAdapter.addTab(R.string.faq, FaqFragment.class);
+
+
 
         if(SendDumpFragment.getLastestDump(this)!=null) {
           //  mPagerAdapter.addTab(R.string.crashdump, SendDumpFragment.class);
@@ -69,6 +77,8 @@ public class MainActivity extends BaseActivity {
 
         TabBarView tabs = (TabBarView) findViewById(R.id.sliding_tabs);
         tabs.setViewPager(mPager);
+
+
 
 
         Intent returnIntent2 = new Intent(getApplicationContext(),ReMainActivity.class);
@@ -102,7 +112,6 @@ public class MainActivity extends BaseActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void disableToolbarElevation() {
         ActionBar toolbar = getActionBar();
-        toolbar.setElevation(0);
     }
 
 

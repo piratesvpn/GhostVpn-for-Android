@@ -29,11 +29,11 @@ public class VpnStatus {
     private static Vector<StateListener> stateListener;
     private static Vector<ByteCountListener> byteCountListener;
 
-    private static String mLaststatemsg = "";
+    public  static String mLaststatemsg = "";
 
-    private static String mLaststate = "NOPROCESS";
+    public static String mLaststate = "NOPROCESS";
 
-    private static int mLastStateresid = R.string.state_noprocess;
+    public static int mLastStateresid = R.string.state_noprocess;
 
     private static long mlastByteCount[] = {0, 0, 0, 0};
     private static HandlerThread mHandlerThread;
@@ -311,7 +311,7 @@ public class VpnStatus {
 
     }
 
-    private static ConnectionStatus getLevel(String state) {
+    public static ConnectionStatus getLevel(String state) {
         String[] noreplyet = {"CONNECTING", "WAIT", "RECONNECTING", "RESOLVE", "TCP_CONNECT"};
         String[] reply = {"AUTH", "GET_CONFIG", "ASSIGN_IP", "ADD_ROUTES"};
         String[] connected = {"CONNECTED"};

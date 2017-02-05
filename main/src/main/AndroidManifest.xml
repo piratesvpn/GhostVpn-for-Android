@@ -29,10 +29,9 @@
         android:name=".core.ICSOpenVPNApplication"
         android:allowBackup="true"
         android:banner="@mipmap/banner_tv"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app"
+        android:icon="@android:color/transparent"
+        android:label=""
         android:supportsRtl="true"
-        android:theme="@style/blinkt"
         tools:ignore="UnusedAttribute">
 
 
@@ -59,7 +58,6 @@
 
         <activity
             android:name=".activities.ReMainActivity"
-            android:label="Ghost VPN"
             tools:ignore="ExportedActivity"
 
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
@@ -76,7 +74,8 @@
 
         <activity
             android:name=".activities.MainActivity"
-            android:label="Ghost VPN"
+            android:theme="@android:style/Theme.Holo.Light"
+
             tools:ignore="ExportedActivity">
 
             <intent-filter>
@@ -117,7 +116,7 @@
             android:name=".OpenVPNTileService"
             android:value="true"
             android:label="@string/qs_title"
-            android:icon="@drawable/ic_quick"
+            android:icon="@drawable/ic_content_copy_white_24dp"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

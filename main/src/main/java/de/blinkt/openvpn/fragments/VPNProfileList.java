@@ -300,7 +300,7 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             updateDynamicShortcuts();
         }
-        VpnStatus.addStateListener(this);
+
     }
 
     @Override
@@ -416,13 +416,13 @@ public class VPNProfileList extends ListFragment implements OnClickListener, Vpn
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(0, MENU_ADD_PROFILE, 0, R.string.menu_add_profile)
-                .setIcon(R.drawable.ic_menu_add)
+                .setIcon(R.drawable.ic_add_circle_outline_grey600_24dp)
                 .setAlphabeticShortcut('a')
                 .setTitleCondensed(getActivity().getString(R.string.add))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         menu.add(0, MENU_IMPORT_PROFILE, 0, R.string.menu_import)
-                .setIcon(R.drawable.ic_menu_import)
+                .setIcon(R.drawable.ic_menu_import_grey)
                 .setAlphabeticShortcut('i')
                 .setTitleCondensed(getActivity().getString(R.string.menu_import_short))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);

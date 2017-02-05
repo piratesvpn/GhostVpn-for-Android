@@ -52,6 +52,7 @@ public class DisconnectVPN extends Activity implements DialogInterface.OnClickLi
         intent.setAction(OpenVPNService.START_SERVICE);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         showDisconnectDialog();
+        //hagaloAfuera();
     }
 
     @Override
@@ -62,14 +63,30 @@ public class DisconnectVPN extends Activity implements DialogInterface.OnClickLi
 
     private void showDisconnectDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.title_cancel);
-        builder.setMessage(R.string.cancel_connection_query);
-        builder.setNegativeButton(android.R.string.no, this);
-        builder.setPositiveButton(android.R.string.yes, this);
-        builder.setNeutralButton(R.string.reconnect, this);
-        builder.setOnCancelListener(this);
+        builder.setTitle("Conexion VPN cancelada");
+        builder.setMessage("La conexion a la red VPN se ha detenido");
+        //builder.setNegativeButton(android.R.string.no, this);
+        builder.setPositiveButton("Aceptar", this);
+        //builder.setNeutralButton(R.string.reconnect, this);
+        //builder.setOnCancelListener(this);
 
         builder.show();
+
+
+
+
+    }
+
+    public void hagaloAfuera(){
+        ProfileManager.setConntectedVpnProfileDisconnected(this);
+        if (mService != null) {
+            try {
+                mService.stopVPN(false);
+            } catch (RemoteException e) {
+                VpnStatus.logException(e);
+            }
+        }
+        finish();
     }
 
     @Override
