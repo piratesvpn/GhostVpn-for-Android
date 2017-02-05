@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
@@ -32,7 +31,6 @@ import android.widget.EditText;
 
 import java.io.IOException;
 
-import de.blinkt.openvpn.activities.LogWindow;
 import de.blinkt.openvpn.activities.ReMainActivity;
 import de.blinkt.openvpn.core.ConnectionStatus;
 import de.blinkt.openvpn.core.IServiceStatus;

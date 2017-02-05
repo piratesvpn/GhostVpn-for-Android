@@ -18,7 +18,6 @@ import java.util.Locale;
 import java.util.Vector;
 
 import de.blinkt.openvpn.R;
-import de.blinkt.openvpn.VpnProfile;
 
 public class VpnStatus {
 

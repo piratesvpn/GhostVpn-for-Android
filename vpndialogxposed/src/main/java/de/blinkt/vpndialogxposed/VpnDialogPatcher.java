@@ -7,7 +7,6 @@ package de.blinkt.vpndialogxposed;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.IBinder;
 import android.widget.Toast;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -18,7 +17,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 
 
-import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 

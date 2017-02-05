@@ -23,7 +23,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 
 import de.blinkt.openvpn.BuildConfig;
 import de.blinkt.openvpn.R;

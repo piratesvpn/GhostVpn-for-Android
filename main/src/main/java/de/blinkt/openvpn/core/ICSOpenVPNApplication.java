@@ -12,10 +12,6 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 */
 
-import de.blinkt.openvpn.BuildConfig;
-import de.blinkt.openvpn.R;
-import de.blinkt.openvpn.core.PRNGFixes;
-
 public class ICSOpenVPNApplication extends Application {
     private StatusListener mStatus;
 

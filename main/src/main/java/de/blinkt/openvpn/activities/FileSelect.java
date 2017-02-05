@@ -8,7 +8,6 @@ package de.blinkt.openvpn.activities;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -27,7 +26,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
-import android.widget.Toast;
 
 import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.VpnProfile;

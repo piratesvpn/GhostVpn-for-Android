@@ -15,8 +15,6 @@ import android.support.v4n.app.FragmentStatePagerAdapter;
 
 import java.util.Vector;
 
-import de.blinkt.openvpn.activities.MainActivity;
-
 /**
 * Created by arne on 18.11.14.
 */
